@@ -1,0 +1,117 @@
+{
+    "devMode": true
+    , "hidden": {
+        "agency": "El Paso County Sheriff's Office"
+        , "agency_abbr": "EPSO"
+        , "lab_loc": "Digital Forensics Unit (Office of the Sheriff, Investigations Division, 27 East Vermijo Avenue, Colorado Springs, CO 80903)"
+        , "glossary": [
+            { "term": "Advanced Logical", "definition": "Logical extraction of data is performed, for the most part, through a designated API (Application Programming Interface), available from the device vendor. Just as the API allows commercial third-party apps to communicate with the device OS (operating system), it also enables forensically sound data extraction. Upon connection, the UFED loads the relevant vendor API to the device. The UFED then makes read-only API calls to request data from the phone. The phone replies to valid API requests to extract designated content items such as text messages (SMS), phonebook entries, pictures, etc. From a technical standpoint, API-based logical extraction is straightforward to implement and the results are provided in a readable format. However, the logical method is limited to the scope of content the specific vendor has made available through its API. Pictures taken via third-party app, for example, are likely stored in a folder that is different from the default. Therefore, the API will not see that they exist and will not make them available to a UFED logical extraction. To access this data, an examiner would need to access the file system and examine the data associated with the particular application in question. In addition, not all devices have a common interface to extract emails, and the API will not be applicable." }
+            , { "term": "Logical", "definition": "Logical extraction of data is performed, for the most part, through a designated API (Application Programming Interface), available from the device vendor. Just as the API allows commercial third-party apps to communicate with the device OS (operating system), it also enables forensically sound data extraction. Upon connection, the UFED loads the relevant vendor API to the device. The UFED then makes read-only API calls to request data from the phone. The phone replies to valid API requests to extract designated content items such as text messages (SMS), phonebook entries, pictures, etc. From a technical standpoint, API-based logical extraction is straightforward to implement and the results are provided in a readable format. However, the logical method is limited to the scope of content the specific vendor has made available through its API. Pictures taken via third-party app, for example, are likely stored in a folder that is different from the default. Therefore, the API will not see that they exist and will not make them available to a UFED logical extraction. To access this data, an examiner would need to access the file system and examine the data associated with the particular application in question. In addition, not all devices have a common interface to extract emails, and the API will not be applicable." }
+            , { "term": "Filesystem", "definition": "Another logical method extends the examiner’s reach to the phone’s live partition. Available with the UFED Ultimate license, a file system extraction uses different device-specific methods to copy the file system. While these are comparable to the API used in logical methods, they use different sets of built-in protocols, depending on the OS. The mix of protocols often differs from device family to device family. In some cases, not only with iOS devices as described above but also with Android and BlackBerry® models, it may be necessary to rely on device backup files to make available files, hidden files, and other data that is not necessarily accessible through the phone’s API. File system extraction. This can include some user deleted and hidden data contained within SQLite databases, including web history, email headers, EXIF data on images, and system data." }
+            , { "term": "Physical", "definition": "To allow the most comprehensive and detailed analysis of the device, Cellebrite’s physical extraction capability accesses the additional data layers, in both allocated and unallocated space, that construct the phone’s physical memory. These layers include three different groups of content pertinent to investigators: \"Logical\" content unavailable through API (e.g. call logs on smartphones and feature phones), deleted content the same text message shows up multiple times because garbage collection has not yet happened Physical extraction, and content that the phone collects without any user action (and sometimes without user knowledge). For example: wi-fi networks, GPS locations, web history, email headers and EXIF data on images, and system data. The physical extraction allows the examiner to access this data by creating a bit-for-bit copy of the mobile device’s flash memory. As with the file system extraction, the data within this copy can be decoded via UFED Physical Analyzer. Seeing where the data is located within the device’s memory enables the analyst to interpret the data." }
+        ]
+        , "returnToEvidenceStatement_noWaiver": "The device was re-sealed and placed back into Evidence."
+        , "returnToEvidenceStatement_waiver": "The device was returned to {requester}."
+    }
+    , "general": {
+        "examiner": "Detective Robert Sirois/13025"
+        , "reportdate_fmt": "M/D/YY"
+        , "unit": "GB"
+        , "units": [
+            { "label": "B", "value": "B" }
+            , { "label": "KB", "value": "KB" }
+            , { "label": "MB", "value": "MB" }
+            , { "label": "GB", "value": "GB" }
+            , { "label": "TB", "value": "TB" }
+        ]
+        , "auth_type": "waiver"
+        , "auth_types": [
+            { "label": "Waiver", "value": "Waiver" }
+            , { "label": "Warrant", "value": "Warrant" }
+            , { "label": "Court Order", "value": "Court Order" }
+            , { "label": "No Expectation of Privacy", "value": "No Expectation of Privacy" }
+            , { "label": "Abandoned", "value": "Abandoned" }
+            , { "label": "Lost", "value": "Lost" }
+            , { "label": "Other", "value": "Other" }
+        ]
+    }
+    , "evidence": {
+        "evid_receivefrom": "Evidence Staff"
+        , "evid_receivedate_fmt": "M/D/YY"
+        , "exam_complete_fmt": "M/D/YY"
+    }
+    , "device_information": {
+        "defects": "(None.)"
+    }
+    , "identifiers": {
+        "types": [
+            { "label": "-- Identifier Type --", "value": "default" }
+            , { "label": "IMEI", "value": "IMEI" }
+            , { "label": "IMSI", "value": "IMSI" }
+            , { "label": "MEID", "value": "MEID" }
+            , { "label": "S/N", "value": "Serial Number" }
+            , { "label": "MSISDN", "value": "MSISDN" }
+            , { "label": "MAC", "value": "MAC" }
+            , { "label": "UDID", "value": "UDID" }
+            , { "label": "ECID", "value": "ECID" }
+            , { "label": "ICCID", "value": "ICCID" }
+            , { "label": "Apple ID", "value": "Apple ID" }
+            , { "label": "Android ID", "value": "Android ID" }
+            , { "label": "Advertising ID", "value": "Advertising ID" }
+            , { "label": "Bluetooth MAC", "value": "Bluetooth MAC" }
+            , { "label": "WiFi MAC", "value": "WiFi MAC" }
+            , { "label": "Email Address", "value": "Email Address" }
+            , { "label": "Device Name", "value": "Device Name" }
+        ]
+    }
+    , "device_state": {
+        "states": [
+            { "label": "Powered on?", "value": "Powered On", "group": "devstate" }
+            , { "label": "Airplane mode on?", "value": "Airplane Mode On", "group": "devstate" }
+            , { "label": "WiFi enabled?", "value": "WiFi Enabled", "group": "devstate" }
+            , { "label": "Device locked?", "value": "Locked", "group": "devstate" }
+        ]
+    }
+    , "acquisition": {
+        "methods": [
+            { "label": "Axiom", "value": "acq_axiom", "group": "acq_method", "col": 0 }
+            , { "label": "Cellebrite Touch 2", "value": "Cellebrite Touch 2", "group": "acq_method", "col": 0 }
+            , { "label": "Cellebrite 4PC", "value": "Cellebrite 4PC", "group": "acq_method", "col": 0 }
+            , { "label": "DVR Examiner", "value": "DVR Examiner", "group": "acq_method", "col": 0 }
+            , { "label": "GrayKey", "value": "GrayKey", "group": "acq_method", "col": 0 }
+            , { "label": "Macquisition", "value": "Macquisition", "group": "acq_method", "col": 0 }
+
+            , { "label": "Forensic Duplicator", "value": "Tableau TX1", "group": "acq_method", "col": 1 }
+            , { "label": "FTK Imager", "value": "AccessData FTK Imager", "group": "acq_method", "col": 1 }
+            , { "label": "Manual", "value": "Manual", "col": 1 }
+            , { "label": "Memory Capture (Specify Tool)", "value": "Belkasoft RAMCapturer", "group": "acq_method", "col": 1 }
+            , { "label": "Paladin", "value": "Sumuri Paladin", "group": "acq_method", "col": 1 }
+            , { "label": "Targeted (Specify Tool)", "value": "KAPE", "group": "acq_method", "col": 1 }
+
+            , { "label": "Photos", "value": "acq_photos", "group": "acq_method", "col": 2 }
+        ]
+        , "types": [
+            { "label": "-- Select Type --", "value": "default" }
+            , { "label": "Logical", "value": "Logical" }
+            , { "label": "Advanced Logical", "value": "Advanced Logical" }
+            , { "label": "Filesystem", "value": "Filesystem" }
+            , { "label": "Partial Filesystem", "value": "Partial Filesystem" }
+            , { "label": "Partial Filesystem (AFU)", "value": "Partial Filesystem (AFU)" }
+            , { "label": "Partial Filesystem (BFU)", "value": "Partial Filesystem (BFU)" }
+            , { "label": "Physical", "value": "Physical" }
+        ]
+        , "hash_types": [
+            { "label": "MD5", "value": "MD5" }
+            , { "label": "SHA1", "value": "SHA1" }
+            , { "label": "SHA256", "value": "SHA256" }
+        ]
+    }
+    , "processing": {
+        "methods": [
+            { "label": "Autopsy", "value": "Autopsy", "group": "proc_method", "col": 0 }
+            , { "label": "Axiom", "value": "Magnet Axiom", "group": "proc_method", "col": 0 }
+            , { "label": "Cellebrite", "value": "Cellebrite Physical Analyzer", "group": "proc_method", "col": 0 }
+            , { "label": "DVR Examiner", "value": "DVR Examiner", "group": "proc_method", "col": 0 }
+        ]
+    }
+}

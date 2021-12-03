@@ -1,0 +1,31 @@
+{
+    "name": "Digital Forensics Report Builder",
+    "version": "1.0.0",
+    "description": "Builds docx reports using parsed files from forensics software and form inputs.",
+    "main": "main.js",
+    "author": "Robert Sirois and Universes Games",
+    "license": "Apache",
+    "dependencies": {
+        "angular-expressions": "^1.1.4",
+        "docxtemplater": "^3.26.4",
+        "express": "^4.17.1",
+        "express-fileupload": "^1.2.1",
+        "express-validator": "^6.13.0",
+        "moment-timezone": "^0.5.34",
+        "pizzip": "^3.1.1",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^21.0.0",
+        "@rollup/plugin-json": "^4.1.0",
+        "@rollup/plugin-node-resolve": "^13.0.5",
+        "@rollup/plugin-replace": "^3.0.0",
+        "electron": "^16.0.1",
+        "electron-winstaller": "^5.0.0"
+    },
+    "scripts": {
+        "build": "rollup -c rollup.config.js",
+        "prestart": "rollup -c rollup.config.js",
+        "start": "electron ."
+    }
+}
