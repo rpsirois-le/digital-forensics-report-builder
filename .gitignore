@@ -1,5 +1,8 @@
 node_modules/
+dist/
 samples/
 package-lock.json
 .DS_Store
 *.swp
+*.bak
+Squirrel.exe

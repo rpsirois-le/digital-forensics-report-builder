@@ -1,5 +1,6 @@
 {
-    "name": "Digital Forensics Report Builder",
+    "zname": "Digital Forensics Report Builder",
+	"name": "digital-forensics-reports",
     "version": "1.0.0",
     "description": "Builds docx reports using parsed files from forensics software and form inputs.",
     "main": "main.js",
@@ -21,11 +22,23 @@
         "@rollup/plugin-node-resolve": "^13.0.5",
         "@rollup/plugin-replace": "^3.0.0",
         "electron": "^16.0.1",
-        "electron-winstaller": "^5.0.0"
+        "electron-builder": "^22.14.5",
+        "electron-packager": "^15.4.0"
     },
     "scripts": {
         "build": "rollup -c rollup.config.js",
         "prestart": "rollup -c rollup.config.js",
-        "start": "electron ."
-    }
+        "start": "electron .",
+		"deploy": "set CSC_LINK=https://universesapi.s3.us-west-2.amazonaws.com/uni/certs/Universes+Games.pfx & electron-builder build"
+    },
+	"build": {
+		"win": {
+			"target": "portable",
+			"certificateFile": "./deployWindowsFiles/Universes Games.pfx",
+			"icon": "./deployWindowsFiles/icon.png"
+		},
+		"directories": {
+			"output": "./dist"
+		}
+	}
 }
