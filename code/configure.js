@@ -171,7 +171,7 @@ const Configurator = props => {
                         , e( 'li', {}, [
                             e( 'span', {}, 'Edit in something like ' )
                             , e( 'a', { href: 'https://www.vim.org/', target: '_blank' }, 'Vim' )
-                            , e( 'span', {}, 'or ' )
+                            , e( 'span', {}, ' or ' )
                             , e( 'a', { href: 'https://notepad-plus-plus.org/', target: '_blank' }, 'Notepad++' )
                             , e( 'span', {}, '.' )
                         ])

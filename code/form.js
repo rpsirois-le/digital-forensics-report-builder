@@ -50,7 +50,7 @@ const Form = props => {
         .then( res => {
             if ( res.status == 200 ) {
                 res.json().then( data => {
-                    if ( data.errors ) return console.log( 'Error in OK response:', data.errors )
+                    if ( data.error ) return setMessage([ 'is-danger', `Error: ${ data.error }` ])
 
                     window.open( `/download/${ data.token }`, '_blank' )
 
@@ -58,20 +58,24 @@ const Form = props => {
                 })
             } else if ( res.status == 400 ) {
                 res.json().then( data => {
-                    console.log( 'Errors in request:', data.errors )
                     setMessage([ 'is-danger', `Error building report: ${ data.errors }` ])
                 })
+            } else if ( res.status == 500 ) {
+                try {
+                    res.json().then( data => {
+                        setMessage([ 'is-danger', `Server error: ${ data.error }` ])
+                    })
+                } catch ( err ) {
+                    setMessage([ 'is-danger', 'Server error.' ])
+                }
             } else {
-                console.log( 'Problem with request to generate report.' )
                 setMessage([ 'is-danger', 'Server error.' ])
             }
 
             setSubmitting( false )
         })
         .catch( err => {
-            console.log( err )
             setMessage([ 'is-danger', `Unknown error: ${ err }` ])
-
             setSubmitting( false )
         })
     }

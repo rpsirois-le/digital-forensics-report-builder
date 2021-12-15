@@ -135,8 +135,15 @@ const generateReport = async ( filename, data ) => {
             })
 
             const token = uuidv4()
+            const outputDir = p.join( __dirname, 'output' )
 
-            await fs.promises.writeFile( p.join( __dirname, 'output' , `${ token }.docx` ), buffer )
+            try {
+                const outputStats = await fs.promises.stat( outputDir )
+            } catch ( err ) {
+                await fs.promises.mkdir( outputDir )
+            }
+
+            await fs.promises.writeFile( p.join( outputDir, `${ token }.docx` ), buffer )
 
             return res( token )
         } catch ( err ) {
@@ -171,7 +178,7 @@ app.get( '/templates', ( req, res ) => {
     fs.readdir( p.join( __dirname, './docx' ), ( err, files ) => {
         if ( err ) return res.status( 500 ).json({ error: err })
 
-        res.status( 200 ).json({ err, files })
+        res.status( 200 ).json({ err, files: files.filter( file => p.extname( file ).toLowerCase() == '.docx' ) })
     })
 })
 
@@ -213,7 +220,7 @@ app.post(
             const token = await generateReport( 'filename goes here?', req.body )
 
             res.status( 200 ).json({
-                errors: false
+                error: false
                 , token
             })
         } catch ( err ) {
