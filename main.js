@@ -2,6 +2,8 @@ const p = require( 'path' )
 const fs = require( 'fs' )
 const stream = require( 'stream' )
 
+const resourcePath = !process.env.NODE_ENV || process.env.NODE_ENV == 'production' ? process.resourcePath : __dirname
+
 const express = require( 'express' )
 const fileUpload = require( 'express-fileupload' )
 const { body, param, validationResult } = require( 'express-validator' )
@@ -34,7 +36,7 @@ const parser = tag => {
 const generateReport = async ( filename, data ) => {
     return new Promise( async ( res, rej ) => {
         try {
-            const tpl = await fs.promises.readFile( p.join( __dirname, `./docx/${ data.template }` ), 'binary' )
+            const tpl = await fs.promises.readFile( p.join( resourcePath, `./docx/${ data.template }` ), 'binary' )
 
             let zip = new Zip( tpl )
             let doc = new Docx().loadZip( zip ).setOptions({
@@ -84,7 +86,7 @@ const generateReport = async ( filename, data ) => {
             if ( data.acq_pw ) {
                 try {
                     // might need to do this in sqlite if the file gets too big
-                    const pwPath = p.join( __dirname, 'passwords', 'passwords.txt' )
+                    const pwPath = p.join( resourcePath, 'passwords', 'passwords.txt' )
                     const file = await fs.promises.readFile( pwPath, 'utf8' )
                     let newFile = `${ file }`
 
@@ -97,7 +99,7 @@ const generateReport = async ( filename, data ) => {
 
                 if ( data.owner ) {
                     try {
-                        const pwByOwnerPath = p.join( __dirname, 'passwords', 'passwords-by-owner.txt' )
+                        const pwByOwnerPath = p.join( resourcePath, 'passwords', 'passwords-by-owner.txt' )
                         const file = await fs.promises.readFile( pwByOwnerPath, 'utf8' )
                         let foundOwner = false
                         let lines = file.split( '\n' ).map( line => {
@@ -135,7 +137,7 @@ const generateReport = async ( filename, data ) => {
             })
 
             const token = uuidv4()
-            const outputDir = p.join( __dirname, 'output' )
+            const outputDir = p.join( resourcePath, 'output' )
 
             try {
                 const outputStats = await fs.promises.stat( outputDir )
@@ -152,17 +154,17 @@ const generateReport = async ( filename, data ) => {
     })
 }
 
-app.get( '/configure', ( req, res ) => { res.sendFile( p.join( __dirname, 'public/configure.html' ) ) } )
+app.get( '/configure', ( req, res ) => { res.sendFile( p.join( resourcePath, 'public/configure.html' ) ) } )
 
-app.get( '/configure/current', ( req, res ) => { res.download( p.join( __dirname, 'config/config.json' ) ) } )
+app.get( '/configure/current', ( req, res ) => { res.download( p.join( resourcePath, 'config/config.json' ) ) } )
 
-app.get( '/configure/default', ( req, res ) => { res.download( p.join( __dirname, 'config/default.json' ) ) } )
+app.get( '/configure/default', ( req, res ) => { res.download( p.join( resourcePath, 'config/default.json' ) ) } )
 
 app.post(
     '/configure/load'
     , async ( req, res ) => {
         config = req.body
-        fs.writeFile( p.join( __dirname, 'config/config.json' ), JSON.stringify( req.body, null, 4 ), err => {
+        fs.writeFile( p.join( resourcePath, 'config/config.json' ), JSON.stringify( req.body, null, 4 ), err => {
             if ( err ) return res.status( 400 ).json({ error: 'Failed to write configuration file.' })
 
             return res.status( 200 ).json({ error: false })
@@ -170,12 +172,12 @@ app.post(
     }
 )
 
-app.get( '/passwords', ( req, res ) => { res.download( p.join( __dirname, 'passwords/passwords.txt' ) ) } )
+app.get( '/passwords', ( req, res ) => { res.download( p.join( resourcePath, 'passwords/passwords.txt' ) ) } )
 
-app.get( '/passwords/byowner', ( req, res ) => { res.download( p.join( __dirname, 'passwords/passwords-by-owner.txt' ) ) } )
+app.get( '/passwords/byowner', ( req, res ) => { res.download( p.join( resourcePath, 'passwords/passwords-by-owner.txt' ) ) } )
 
 app.get( '/templates', ( req, res ) => {
-    fs.readdir( p.join( __dirname, './docx' ), ( err, files ) => {
+    fs.readdir( p.join( resourcePath, './docx' ), ( err, files ) => {
         if ( err ) return res.status( 500 ).json({ error: err })
 
         res.status( 200 ).json({ err, files: files.filter( file => p.extname( file ).toLowerCase() == '.docx' ) })
@@ -183,7 +185,7 @@ app.get( '/templates', ( req, res ) => {
 })
 
 app.get( '/templates/remove/:docname', ( req, res ) => {
-    fs.unlink( p.join( __dirname, 'docx', req.params.docname ), err => {
+    fs.unlink( p.join( resourcePath, 'docx', req.params.docname ), err => {
         if ( err ) return res.status( 500 ).json({ error: err })
 
         res.status( 200 ).json({ error: false })
@@ -195,7 +197,7 @@ app.post(
     , async ( req, res ) => {
         const file = req.files.file
 
-        fs.writeFile( p.join( __dirname, `docx/${ file.name }` ), file.data, err => {
+        fs.writeFile( p.join( resourcePath, `docx/${ file.name }` ), file.data, err => {
             if ( err ) return res.status( 400 ).json({ error: 'Failed to write template file.' })
 
             return res.status( 200 ).json({ error: false })
@@ -234,7 +236,7 @@ app.get(
     '/download/:token'
     , param( 'token' ).isUUID( 4 ).withMessage( 'Download token must be a valid UUID (v4)' )
     , ( req, res ) => {
-        const path = p.join( __dirname, 'output', `${ req.params.token }.docx` )
+        const path = p.join( resourcePath, 'output', `${ req.params.token }.docx` )
 
         res.download( path, () => {
             setTimeout( () => {
@@ -260,7 +262,7 @@ app.listen( port, () => {
             //, width: screen.width
             //, height: screen.height
             , webPreferences: {
-                preload: p.join( __dirname, 'preload.js' )
+                preload: p.join( resourcePath, 'preload.js' )
             }
         })
 

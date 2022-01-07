@@ -37,6 +37,28 @@
 			"certificateFile": "./deployWindowsFiles/Universes Games.pfx",
 			"icon": "./deployWindowsFiles/icon.png"
 		},
+        "extraFiles": [
+            {
+                "from": "config"
+                , "to": "resources/config"
+                , "filter": [ "**/*" ]
+            }
+            , {
+                "from": "docx"
+                , "to": "resources/docx"
+                , "filter": [ "**/*" ]
+            }
+            , {
+                "from": "passwords"
+                , "to": "resources/passwords"
+                , "filter": [ "**/*" ]
+            }
+            , {
+                "from": "public"
+                , "to": "resources/public"
+                , "filter": [ "**/*" ]
+            }
+        ],
 		"directories": {
 			"output": "./dist"
 		}
