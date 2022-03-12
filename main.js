@@ -2,7 +2,9 @@ const p = require( 'path' )
 const fs = require( 'fs' )
 const stream = require( 'stream' )
 
-const resourcePath = !process.env.NODE_ENV || process.env.NODE_ENV == 'production' ? process.resourcePath : __dirname
+const resourcePath = process.resourcePath || __dirname
+
+console.log( resourcePath )
 
 const express = require( 'express' )
 const fileUpload = require( 'express-fileupload' )

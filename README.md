@@ -2,7 +2,7 @@
 
 Version | 1.0.0
 --- | ---
-**Author** | Robert Sirois
+**Author** | Robert Sirois<br>Former detective, digital forensics expert
 **Company** | [Universes Games](https://universesgames.com)
 **License** | Apache
 
@@ -10,29 +10,21 @@ Version | 1.0.0
 
 These are packaged as standalone launchers - no need for installation.
 
-[Windows]()
-
-[macOS]()
-
-[Linux]()
-
-[Docker]()
+***TODO*** [Windows]()
 
 ### Install on a Synology NAS
 
-1. Download Docker from "Add-on Packages"
+1. Download Docker from "Add-on Packages" in Synology
 2. Use the Docker app to create a new container from file
-3. Launch the container and set port settings to `3001:whatever`
-4. Website should now be accessible on the Synology IP address at port `whatever`
+3. Launch the container and set port settings to `3001:XXXX`
+4. Website should now be accessible on the Synology IP address at port `XXXX`
 5. (Port 80 is the default HTTP port so you don't have to specify it in the URL.)
-
-(image)
 
 ## Configure
 
-Use the built-in configurator (link in bottom of web page) to manage the configuration JSON file. The JSON file must be edited in separate software such as Vim or Notepad++. If you're lazy like me you can also use a website like [jsonlint.com](https://jsonlint.com/).
+Use the built-in configurator (link in at bottom of screen in the software) to manage the configuration JSON file. The JSON file must be edited in separate software such as Vim or Notepad++. If you're lazy like me you can also use a website like [jsonlint.com](https://jsonlint.com/).
 
-The report template may also be downloaded/uploaded in the configurator.
+Report templates may also be downloaded/uploaded in the configurator.
 
 ## Supported Source Files
 
@@ -40,6 +32,7 @@ Simply drag and drop onto the software to auto-fill the form. Later files (if dr
 
 Software | File Type | Notes
 --- | --- | ---
+Axiom | TXT | ***TODO***
 Cellebrite Physical Analyzer | XML | Custom fields, "Device info" and "User accounts" artifacts only
 Cellebrite Physical Analyzer | CSV | Export of artifact counts
 DVR Examiner | PDF | Entire file
@@ -64,23 +57,27 @@ Today (long format) | `today` | MMMM Do, YYYY
 Today (short format) | `todayShort` | M/D/YY
 Year | `year` | YYYY
 Now | `now` | HHmm
-Singular Serial Number | `sn` | This takes the value of the first found 'Serial Number' in the identifiers array.
+Singular Serial Number | `sn` | This takes the value of the first found *Serial Number* in the identifiers array.
 a/an Extraction Type | `acq_type_wia` | a/an `{acq_type}`
 Extraction Type Definition | `acq_type_def` | Performs a lookup on `hidden.glossary` for term matching `acq_type` for the definition.
 a/an Device Color | `dev_color_wia` | a/an `{dev_color}`
 a/an Device Model Name | `dev_model_name_wia` | a/an `{dev_model_name}`
 Lowercase Authorization | `auth_type_lower` | Lowercase `{auth_type}`
-Return to Evidence Statement | `returnToEvidenceStatement` | Uses waiver value if `{auth_type}` is waiver or noWaiver if not.
+Return to Evidence Statement | `returnToEvidenceStatement` | Uses waiver value if `{auth_type}` is waiver or `hidden.returnToEvidenceStatement_noWaiver` if not.
 Acquisition System | `acq_system` | Set to label for truthy acquisition method (except for photos).
 Processing System | `proc_system` | Set to label for truthy processing method.
+
+### Axiom TXT
+
+Use the device information text file? The only real place to put information is in the description... would be very user-dependent for format.
+
+Thoughts?
 
 ### Cellebrite XML
 
 Export only "Device info" and "User accounts" artifacts with an XML report type.
 
-The following custom fields are supported by configuring them in the *Case information* section of the report options:
-
-(image)
+The following *custom fields* are supported by configuring them in the *Case information* section of the report options (within the Physical Analyzer software):
 
 Field Name (Case Sensitive) | Variable | Purpose
 --- | --- | ---
@@ -124,8 +121,6 @@ DeviceInfoDetectedPhoneModel | `dev_model_name` | Device model as reported by Ce
 
 This file is simply the exported artifact counts.
 
-(image)
-
 Variables:
 
 Field Name (Case Sensitive) | Variable | Purpose
@@ -152,8 +147,6 @@ Examiner: | `examiner` | Examiner name
 
 The log file FTK writes after imaging which contains case information and hashes.
 
-(image)
-
 Variables:
 
 Field Name | Variable | Purpose
@@ -172,8 +165,6 @@ MD5 checksum: | `acq_hash_type`, `acq_hash` | Image hash is MD5 and value of the
 ### GrayKey PDF
 
 This is the only PDF report GrayKey exports along with the other files. The first and second pages are looked at for relevant case information.
-
-(image)
 
 Variables:
 
