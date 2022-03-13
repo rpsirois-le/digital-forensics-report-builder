@@ -1,7 +1,7 @@
 {
     "zname": "Digital Forensics Report Builder",
 	"name": "digital-forensics-reports",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Builds docx reports using parsed files from forensics software and form inputs.",
     "main": "main.js",
     "author": "Robert Sirois and Universes Games",

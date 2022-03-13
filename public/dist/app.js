@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    var devMode = true;
+    var devMode = false;
     var hidden = {
-    	agency: "El Paso County Sheriff's Office",
-    	agency_abbr: "EPSO",
+    	agency: "AGENCY NAME HERE",
+    	agency_abbr: "AGENCY ABBR HERE",
     	lab_loc: "Digital Forensics Unit (Office of the Sheriff, Investigations Division, 27 East Vermijo Avenue, Colorado Springs, CO 80903)",
     	glossary: [
     		{
@@ -28,7 +28,7 @@
     	returnToEvidenceStatement_waiver: "The device was returned to {requester}."
     };
     var general = {
-    	examiner: "Detective Robert Sirois/13025",
+    	examiner: "NAME HERE/EID",
     	reportdate_fmt: "M/D/YY",
     	unit: "GB",
     	units: [

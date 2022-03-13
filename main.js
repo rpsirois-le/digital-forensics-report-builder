@@ -2,7 +2,7 @@ const p = require( 'path' )
 const fs = require( 'fs' )
 const stream = require( 'stream' )
 
-const resourcePath = process.resourcePath || __dirname
+const resourcePath = process.resourcesPath || __dirname
 
 console.log( resourcePath )
 
@@ -11,7 +11,7 @@ const fileUpload = require( 'express-fileupload' )
 const { body, param, validationResult } = require( 'express-validator' )
 
 const app = express()
-app.use( express.static( p.resolve( __dirname, './public' ) ) )
+app.use( express.static( p.resolve( resourcePath, './public' ) ) )
 app.use( express.json() )
 app.use( fileUpload() )
 
@@ -21,7 +21,7 @@ const Zip = require( 'pizzip' )
 const Docx = require( 'docxtemplater' )
 const expressions = require( 'angular-expressions' )
 
-let config = require( './config/config.json' )
+let config = require( p.resolve( resourcePath, './config/config.json' ) )
 
 expressions.filters.cb = bool => {
     return ( bool == 'true' ) ? '☒' : '☐'
@@ -264,14 +264,14 @@ app.listen( port, () => {
             //, width: screen.width
             //, height: screen.height
             , webPreferences: {
-                preload: p.join( resourcePath, 'preload.js' )
+                preload: 'preload.js'
             }
         })
 
         win.maximize()
         win.show()
         win.loadURL( 'http://localhost:3001/' )
-        if ( config.devMode ) win.openDevTools()
+        //win.openDevTools()
     }
 
 

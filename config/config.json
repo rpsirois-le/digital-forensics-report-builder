@@ -1,8 +1,8 @@
 {
-    "devMode": true
+    "devMode": false
     , "hidden": {
-        "agency": "El Paso County Sheriff's Office"
-        , "agency_abbr": "EPSO"
+        "agency": "AGENCY NAME HERE"
+        , "agency_abbr": "AGENCY ABBR HERE"
         , "lab_loc": "Digital Forensics Unit (Office of the Sheriff, Investigations Division, 27 East Vermijo Avenue, Colorado Springs, CO 80903)"
         , "glossary": [
             { "term": "Advanced Logical", "definition": "Logical extraction of data is performed, for the most part, through a designated API (Application Programming Interface), available from the device vendor. Just as the API allows commercial third-party apps to communicate with the device OS (operating system), it also enables forensically sound data extraction. Upon connection, the UFED loads the relevant vendor API to the device. The UFED then makes read-only API calls to request data from the phone. The phone replies to valid API requests to extract designated content items such as text messages (SMS), phonebook entries, pictures, etc. From a technical standpoint, API-based logical extraction is straightforward to implement and the results are provided in a readable format. However, the logical method is limited to the scope of content the specific vendor has made available through its API. Pictures taken via third-party app, for example, are likely stored in a folder that is different from the default. Therefore, the API will not see that they exist and will not make them available to a UFED logical extraction. To access this data, an examiner would need to access the file system and examine the data associated with the particular application in question. In addition, not all devices have a common interface to extract emails, and the API will not be applicable." }
@@ -14,7 +14,7 @@
         , "returnToEvidenceStatement_waiver": "The device was returned to {requester}."
     }
     , "general": {
-        "examiner": "Detective Robert Sirois/13025"
+        "examiner": "NAME HERE/EID"
         , "reportdate_fmt": "M/D/YY"
         , "unit": "GB"
         , "units": [
