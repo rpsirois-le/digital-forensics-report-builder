@@ -10,7 +10,7 @@ Version | 1.0.0
 
 These are packaged as standalone launchers - no need for installation.
 
-***TODO*** [Windows]()
+[Windows](https://www.dropbox.com/s/ch4rgezd2btdl9j/digital-forensics-reports%201.0.1.exe?dl=0)
 
 ### Install on a Synology NAS
 
